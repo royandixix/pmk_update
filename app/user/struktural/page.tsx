@@ -1,111 +1,101 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface Leader {
   name: string;
   role: string;
   imageUrl: string;
-  id?: string;
+  id: string;
 }
 
 const leaders: Leader[] = [
-  {
-    name: "Leslie Alexander",
-    role: "Co-Founder / CEO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "1",
-  },
-  {
-    name: "Michael Foster",
-    role: "Co-Founder / CTO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "2",
-  },
-  {
-    name: "Dries Vincent",
-    role: "Business Relations",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "3",
-  },
-  {
-    name: "Lindsay Walton",
-    role: "Front-end Developer",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "4",
-  },
-  {
-    name: "Courtney Henry",
-    role: "Designer",
-    imageUrl:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "5",
-  },
-  {
-    name: "Tom Cook",
-    role: "Director of Product",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    id: "6",
-  },
+  { id: "1", name: "SINTA SATTU", role: "Sekretaris", imageUrl: "/img/pengurus/sekertaris/SINTA SATTU-min.jpg" },
+  { id: "2", name: "ANDRIB ARIB", role: "Ketua Umum", imageUrl: "/img/pengurus/ketua/ANDRIB ARIB-min.jpg" },
+  { id: "3", name: "JESLY PUTRI TIRANDA", role: "Bendahara", imageUrl: "/img/pengurus/bendahara/JESLY PUTRI TIRANDA.JPG" },
+  { id: "4", name: "NATALIA ARRUAN", role: "Wakil Ketua", imageUrl: "/img/pengurus/wakil/NATALIA ARRUAN.jpg" },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
 const LeadershipPage: React.FC = () => {
-  return (
-    <div className="bg-gray-900 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Bagan Struktur Organisasi PMK Universitas Dipa Makassar
-          </h2>
-          <p className="mt-4 text-lg text-gray-400 font-medium">Pengurus Harian</p>
-          <p className="mt-2 text-gray-400">
-            Pengurus Harian adalah anggota biasa yang dipilih dalam Rapat Umum Anggota.
-          </p>
-        </div>
+  const [startIndex, setStartIndex] = useState(0);
 
-        {/* Cards Grid */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {leaders.map((leader) => (
-            <motion.div
-              key={leader.name}
-              className="flex flex-col rounded-2xl overflow-hidden shadow-lg transform transition duration-500"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={cardVariants}
-            >
-              {/* Gambar full */}
-              <img
-                src={leader.imageUrl}
-                alt={`${leader.name}, ${leader.role}`}
-                className="h-96 w-full object-cover"
-              />
-              {/* Info di bawah card */}
-              <div className="bg-gray-800 p-6 text-center">
-                <h3 className="text-xl font-semibold text-white">{leader.name}</h3>
-                <p className="text-indigo-400 font-medium">{leader.role}</p>
-                {leader.id && (
-                  <p className="text-sm text-gray-400 mt-1">
-                    ID: <span className="font-mono">{leader.id}</span>
-                  </p>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+  const visibleCards = [0, 1, 2].map(i => leaders[(startIndex + i) % leaders.length]);
+
+  const handleNext = () => setStartIndex(prev => (prev + 1) % leaders.length);
+  const handlePrev = () => setStartIndex(prev => (prev === 0 ? leaders.length - 1 : prev - 1));
+
+  return (
+    <div className="bg-[#0f1116] min-h-screen flex flex-col items-center py-24 sm:py-32">
+
+      {/* Section Text */}
+      <motion.div
+        className="text-center sm:text-left max-w-3xl mx-auto mb-20 px-4 sm:px-0"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-4xl sm:text-5xl tracking-tight text-white">
+          Bagan Struktur Organisasi PMK Universitas Dipa Makassar
+        </h2>
+        <p className="mt-6 text-xl text-gray-300 font-semibold">Pengurus Harian</p>
+        <p className="mt-3 text-lg text-gray-400 leading-relaxed">
+          Pengurus Harian adalah anggota biasa yang dipilih dalam Rapat Umum Anggota.
+        </p>
+      </motion.div>
+
+      {/* Desktop Slider */}
+      <div className="hidden sm:flex gap-6 justify-center w-full max-w-7xl overflow-hidden">
+        {visibleCards.map((leader) => (
+          <motion.div
+            key={leader.id}
+            className="relative w-64 rounded-lg overflow-hidden bg-gray-800 shadow cursor-pointer"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+          >
+            <img src={leader.imageUrl} alt={leader.name} className="h-[450px] w-full object-cover" />
+            <div className="absolute bottom-0 left-0 right-0 p-3 text-center bg-black/40">
+              <div className="text-xs font-semibold text-white">{leader.role}</div>
+              <h3 className="text-lg text-white">{leader.name}</h3>
+            </div>
+          </motion.div>
+        ))}
       </div>
+
+      {/* Buttons */}
+      <div className="hidden sm:flex justify-center gap-4 mt-6">
+        <button onClick={handlePrev} className="p-2 rounded-full bg-gray-700 text-white hover:bg-gray-600">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <button onClick={handleNext} className="p-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-500">
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="sm:hidden flex flex-col items-center gap-4 px-4 w-full">
+        {leaders.map((leader) => (
+          <motion.div
+            key={leader.id}
+            className="relative w-full max-w-sm rounded-lg overflow-hidden bg-gray-800 shadow cursor-pointer"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+          >
+            <img src={leader.imageUrl} alt={leader.name} className="h-[450px] w-full object-cover" />
+            <div className="absolute bottom-0 left-0 right-0 p-3 text-center bg-black/40">
+              <div className="text-xs font-semibold text-white">{leader.role}</div>
+              <h3 className="text-lg text-white">{leader.name}</h3>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
     </div>
   );
 };

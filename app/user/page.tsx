@@ -1,14 +1,15 @@
-import Visi from './visimisi/page';
-import Struktural from './struktural/page';  // ✅ Ubah menjadi PascalCase
-// import '../styles/globals.css';
+import Visi from "./visimisi/page";
+import Struktural from "./struktural/page";
+import PengurusSection from "./pengurus/page";
+import Kegiatan from "./kegiatan/page";
 
 export default function UserPage() {
   return (
     <div>
-      {/* Panggil komponen Visi */}
       <Visi />
-      <Struktural />  {/* ✅ Gunakan PascalCase */}
-      <></>
+      <Struktural />
+      <PengurusSection />   {/* jalankan */}
+      <Kegiatan />
     </div>
   );
 }

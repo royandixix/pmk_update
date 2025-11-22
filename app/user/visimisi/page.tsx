@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
@@ -58,11 +58,10 @@ export default function PMKSection() {
   return (
     <section
       ref={ref}
-      className="bg-gray-900 min-h-screen flex items-center py-24 sm:py-32"
+      className="bg-[#0f1116] min-h-screen flex items-center py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-16 lg:items-center">
-          
           {/* Gambar kiri */}
           <motion.div
             className="lg:col-span-6 flex flex-col justify-center items-center mb-10 lg:mb-0"
@@ -89,23 +88,23 @@ export default function PMKSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
             >
-              <h3 className="text-xl font-semibold text-indigo-400 uppercase tracking-wide">
+              <h3 className="text-xl  text-indigo-400 uppercase tracking-wide">
                 Jumlah Anggota PMK Universitas Dipa Makassar
               </h3>
 
               <div className="mt-6 grid grid-cols-3 gap-6 text-white">
                 <div>
-                  <p className="text-4xl font-extrabold">{anggotaBiasa}</p>
+                  <p className="text-4xl ">{anggotaBiasa}</p>
                   <p className="text-gray-400 text-sm">Anggota Biasa</p>
                 </div>
 
                 <div>
-                  <p className="text-4xl font-extrabold">{anggotaLuarBiasa}</p>
+                  <p className="text-4xl ">{anggotaLuarBiasa}</p>
                   <p className="text-gray-400 text-sm">Anggota Luar Biasa</p>
                 </div>
 
                 <div>
-                  <p className="text-4xl font-extrabold">{totalAnggota}</p>
+                  <p className="text-4xl ">{totalAnggota}</p>
                   <p className="text-gray-400 text-sm">Total Anggota</p>
                 </div>
               </div>
@@ -119,11 +118,11 @@ export default function PMKSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-base font-semibold text-indigo-400 uppercase tracking-wide">
+            <h2 className="text-base  text-indigo-400 uppercase tracking-wide">
               Kerohanian PMK
             </h2>
 
-            <p className="mt-2 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            <p className="mt-2 text-4xl  tracking-tight text-white sm:text-5xl">
               Visi PMK Universitas Dipa Makassar
             </p>
 
@@ -150,7 +149,7 @@ export default function PMKSection() {
                     />
 
                     <div>
-                      <dt className="text-lg font-semibold text-white">
+                      <dt className="text-lg  text-white">
                         {feature.name}
                       </dt>
                       <dd className="mt-1 text-gray-400 leading-relaxed">
@@ -162,7 +161,6 @@ export default function PMKSection() {
               })}
             </dl>
           </motion.div>
-
         </div>
       </div>
     </section>
